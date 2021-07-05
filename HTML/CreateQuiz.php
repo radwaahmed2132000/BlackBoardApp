@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['type']) ||
+!isset($_SESSION['email']))
+header("Location:Login.html");
+if($_SESSION['type']=="Student")
+header("Location:Home.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,10 +65,12 @@
   <div class="container mt-5 mb-3 ">
     <div class="row">
       <div class="col-lg-4">
-        <form class="login" method="post">
+        <form class="login" action ="../PHP/CreateQuiz.php" method="post">
           <div  id="id01">
             <div class="1">
-                Q<textarea name="1" class='Ques'></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice1'required ><textarea  class='Ques' name="2"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice2'><textarea name="3"></textarea><br><input type='radio' id="6" class='Ques' name="6" value='choice3'><textarea name="4"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice4'><textarea name="5"></textarea><br>
+                <label for="">Quiz name</label><br>
+                <input type="text" name="Quizname" id="Quizname"><br>
+                Q<textarea name="1" class='Ques'></textarea><br><input type='radio' class='Ques' id="6" checked name="6" value='choice1'required ><textarea  class='Ques' name="2"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice2'><textarea name="3"></textarea><br><input type='radio' id="6" class='Ques' name="6" value='choice3'><textarea name="4"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice4'><textarea name="5"></textarea><br>
                 <button class="btn btn-primary" id="6" onclick="nextclick(6)" type="button">Next</button><br><br>
             </div>
 
@@ -146,13 +156,15 @@
              done=true;
         }
     }
+    if($("#Quizname").val()=="")
+      done=true;
     
  
     if(!done)
     { elements=[value+1,value+2,value+3,value+4,value+5,value+6];
 
    
-    $('#id01').append("<div class="+elements[0]+">Q<textarea name="+elements[0]+" id="+elements[0]+" class='Ques'></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice1' ><textarea  class='Ques' name="+elements[1]+" id="+elements[1]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice2'><textarea name="+elements[2]+" id="+elements[2]+">  </textarea><br><input type='radio' id="+elements[5]+" class='Ques' name="+elements[5]+" value='choice3'><textarea name="+elements[3]+" id="+elements[3]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice4'><textarea name="+elements[4]+" id="+elements[4]+"></textarea><br>    <button class='btn btn-primary'  onclick='reply_click("+elements[0]+")'  type='button'>Previous</button>  <button class='btn btn-primary'  onclick='nextclick("+elements[5]+")'  type='button'>Next</button><br><br></div>");  
+    $('#id01').append("<div class="+elements[0]+">Q<textarea name="+elements[0]+" id="+elements[0]+" class='Ques'></textarea><br><input type='radio' checked class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice1' ><textarea  class='Ques' name="+elements[1]+" id="+elements[1]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice2'><textarea name="+elements[2]+" id="+elements[2]+">  </textarea><br><input type='radio' id="+elements[5]+" class='Ques' name="+elements[5]+" value='choice3'><textarea name="+elements[3]+" id="+elements[3]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice4'><textarea name="+elements[4]+" id="+elements[4]+"></textarea><br>    <button class='btn btn-primary'  onclick='reply_click("+elements[0]+")'  type='button'>Previous</button>  <button class='btn btn-primary'  onclick='nextclick("+elements[5]+")'  type='button'>Next</button><br><br></div>");  
  
   }
   else
@@ -165,44 +177,5 @@
 });  
     
 </script>
-<?php
-require_once '../PHP/connection.php';
-if(isset($_POST['submit']))
- { 
-     $Ques=$_POST['1'];
-     $choice1=$_POST['2'];
-     $choice2=$_POST['3'];
-     $choice3=$_POST['4'];
-     $choice4=$_POST['5'];
-     $correct=$_POST['6'];
-    
-         if(!isset($_POST['7']))
-         echo "ok";
-         else
-         echo $_POST['7'];
 
-    
-     
-    //  echo'<script>document.writeln(document.getElementsByClassName("Ques").length)</script>';
-    $var='<script>document.write(document.getElementsByClassName("Ques").length)</script>';
-    $string="6";
-    var_dump($string);
-   if($var==$string)
-   echo"jjj";
-   
-    var_dump($var);
-    
-     $x=intval($var);
-    // echo (intval($var));
-    echo $x;
-     $Quizid=1;
-     
-    
-     $dbConnection = DBConnection::getInst()->getConnection();
-    //  $dbConnection->query("INSERT INTO quiz (")
-     $dbConnection->query("INSERT INTO question (Ques,choice1,choice2,choice3,choice4,correct,Quizid) VALUES('$Ques','$choice1','$choice2','$choice3','$choice4','$correct','$Quizid')");
-  
-
- }
-?>
 </html>

@@ -14,3 +14,11 @@ button
 h5{
     margin-top: 8%;
 }
+#Quizname{
+    position: relative;
+    left:8%;
+    border-color: #007bff;
+    border-radius: 4px;
+    outline:none;
+    margin-bottom: 5px;
+}

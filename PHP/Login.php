@@ -8,6 +8,11 @@ if(isset($_POST["submit"]))
 {
     $email=$_POST['email'];
     $Pass=$_POST['pass'];
+    if(empty($email) || empty($Pass))
+    {
+        echo'<script>alert("Some fields are empty or not checked!");window.location.href="../HTML/Login.html";</script>';
+
+    }
 
      $Student= new Student();
       $Teacher=new Teacher();
