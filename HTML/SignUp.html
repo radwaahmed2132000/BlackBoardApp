@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/SignUp.css">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="Form">
+
+        <div class="Container" >
+            <h1>Welcome</h1>
+            <form class="login"action="../PHP/SignUp.php" method="post">
+                <label for="FristName">FristName</label>
+                <br>
+                <input type="FristName" name="FristName" id="">
+                <br>
+                <label for="LastName">LastName</label>
+                <br>
+                <input type="LastName" name="LastName">
+                <br>
+                
+                <label for="Phone">Phone</label>
+                <br>
+                <input type="tel" name="Phone">
+                <br>
+                <label for="email">Email</label>
+                <br>
+                <input type="email" name="email" id="">
+                <br>
+                <label for="Password">Password</label>
+                <br>
+                <input type="password" name="pass">
+                <br>
+                <label for="Confrim Password">Confrim Password</label>
+                <br>
+                <input type="password" name="Confrimpass">
+                <br>
+                <label for="">Gender</label>
+                <br>
+                   <input type="radio" id="Male" name="Gender" value="Male" required>
+                  <label for="Male">Male</label>
+                  <input type="radio" id="Female" name="Gender" value="Female">
+                  <label for="Female">Female</label>
+                <br> <label for="">Are you Teacher? Or Student?</label> 
+                <br>
+                <input type="radio" id="Teacher" name="type" value="Teacher" required>
+                
+                <label for="Teacher"> Teacher</label>
+                <input type="radio" id="Student" name="type" value="Student">
+                
+                <label for="Student"> Student</label>
+                <br><br>
+               
+                <button class="btn btn-primary" type="submit" name="submit">Sign Up</button>
+                <br><br>
+                
+                <a href="Login.html">Already have an account?</a>
+               
+                
+
+            </form>
+
+        </div>
+        <div class="Back">
+        
+        </div>
+       
+    </div>
+</body>
+<script src="../bootstrap/bootstrap.js"></script>
+<script src="../bootstrap/jquery.js"></script>
+<script src="../bootstrap/popper.main.js"></script>
+</html>

@@ -1,0 +1,45 @@
+*
+{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+   
+
+}
+
+.Form{
+    display:flex;
+    width: 80%;
+    height: 70%;
+    position: absolute;
+    left:10%;
+   top:20%;
+   background-color: white;
+   border-radius: px;
+   border-color: antiquewhite;
+}
+.Back
+{
+  
+  width: 60%;
+  height: 85%;
+ background-image: url(../Images/clip-teacher-and-student-are-back-to-school2.png);
+}
+.Container
+{
+    position: relative;
+    top:5%;
+}
+input{
+    border-radius: 5px;
+ 
+    border-style:solid;
+    border-color: #007bff;
+    outline: none;
+}
+.btn
+{
+    width:85%;
+    height:50% ;
+    border-radius:20px;
+}

@@ -1,0 +1,16 @@
+textarea
+{
+    border:bold;
+    outline:none;
+    border-color: #007bff;
+    border-radius: 5px;
+    margin: 5px 15px;
+}
+button
+{
+    position: relative;
+    left:7%;
+}
+h5{
+    margin-top: 8%;
+}

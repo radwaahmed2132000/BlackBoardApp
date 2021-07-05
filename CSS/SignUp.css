@@ -1,0 +1,47 @@
+*
+{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+   
+
+}
+
+.Form{
+    display:flex;
+    width: 75%;
+    height: 70%;
+    position: absolute;
+    left:25%;
+   top:10%;
+   padding: 2px 2px;
+   background-color: white;
+   border-radius: px;
+   border-color: antiquewhite;
+}
+.Back
+{
+  
+  width: 50%;
+  height: 100;
+ background-image: url(../Images/cherry-618.png);
+
+}
+.Container
+{
+    position: relative;
+    top:5%;
+}
+input{
+    border-radius: 5px;
+ 
+    border-style:solid;
+    border-color: #007bff;
+    outline: none;
+}
+.btn
+{
+    width:85%;
+    height:50% ;
+    border-radius:20px;
+}
