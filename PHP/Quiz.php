@@ -152,7 +152,11 @@ class Quiz
     }
     return null;
    }
- 
+   public function InsertAssigned($studentemail,$Quizid,$Grade)
+   {
+    $this->dbConnection->query("INSERT INTO assigned (studentemail,Quizid,Grade) VALUES('$studentemail','$Quizid','$Grade')");
+   }
+  
 }
 
 

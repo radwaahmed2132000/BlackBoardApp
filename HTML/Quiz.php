@@ -4,6 +4,8 @@ session_start();
 if(!isset($_SESSION['type']) ||
 !isset($_SESSION['email']))
 header("Location:Login.html");
+if($_SESSION['type']=="Teacher")
+header("Location:Home.php");
 ?> -->
 <!DOCTYPE html>
 <html lang="en">
@@ -60,12 +62,14 @@ header("Location:Login.html");
 </header>
 <body>
    <div class="container mt-5 ">
+      <form method="post" action="../PHP/Assign.php">  
        <div class="row">
            <div class="col-lg-3">
                 <img class="img-fluid" src="../Images/clip-school-assignment.png" alt="">
 
            </div>
            <div class="col-lg-6">
+             
                 <?php
                    // id will be changed;????????????????????????
                    $Quizid=15;
@@ -114,13 +118,14 @@ header("Location:Login.html");
                     }
 
                 ?>
+                
            </div>
            <div class="col-lg-3">
                <img class="img-fluid" src="../Images/karlsson-65.png" alt="">
                <button class="btn btn-primary" name="submit" type="submit">Submit</button>
            </div>
        </div>
-       
+      </form>
     </div>
         
     </div>
