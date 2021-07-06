@@ -1,12 +1,12 @@
-<!-- <?php
+<?php
 require_once '../PHP/Quiz.php';
 session_start();
 if(!isset($_SESSION['type']) ||
 !isset($_SESSION['email']))
 header("Location:Login.html");
-if($_SESSION['type']=="Teacher")
-header("Location:Home.php");
-?> -->
+if($_SESSION['type']=="Student")
+ header("Location:Home.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +15,7 @@ header("Location:Home.php");
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../CSS/Home.css">
     <link rel="stylesheet" href="../CSS/Footer.css">
-    <link rel="stylesheet" href="../CSS/Quiz.css">
+    <link rel="stylesheet" href="../CSS/Course.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -26,7 +26,7 @@ header("Location:Home.php");
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Course</title>
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
@@ -61,91 +61,47 @@ header("Location:Home.php");
     </nav>
 </header>
 <body>
-   <div class="container mt-5 ">
-      <form method="post" action="../PHP/Assign.php">  
-       <div class="row">
-           <div class="col-lg-3">
-                <img class="img-fluid" src="../Images/clip-school-assignment.png" alt="">
+   
+</body>
+<div class="container mt-5 mb-3 ">
+    <div class="Quiz">
+        <form class="login" action ="../PHP/addCourse.php" method="post">
 
-           </div>
-           <div class="col-lg-6">
-             
-                <?php
-                   // id will be changed;????????????????????????
-                   $Quizid=17;
-                   $Quiz=new Quiz();
-                   $date=date("Y-m-d");
-                  
-                   $time= date("h:i:s");
-                  
-                  if($date!= $Quiz->GetDateofQuiz($Quizid) )
-                   {
-                    header("Location:Home.php");
-                   }
-                   else if($time<$Quiz->GetstartofQuiz($Quizid) || $time>$Quiz->GetEndofQuiz($Quizid))
-                   {
-                    header("Location:Home.php");
-                        
-                   }
-
-                  
-                  $result= $Quiz->GetQuestions($Quizid);
-                    // If the query returns a result
-                    if ($result->num_rows > 0) {?>
-                      <h3><?php echo $Quiz-> Getname($Quizid);?></h3>
-                    
-                    <?php
-                        // output data of each row
-                        while ($row = $result->fetch_assoc()) {?>
-                          <div class="Questions">
-                            <h5> <?php echo $Quiz-> GetQues($row["Quesid"]);?> </h5>
-                            
-                            <p>
-                                <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"   value='choice1' >
-                                <?php
-                                    echo $Quiz->Getchoice1($row["Quesid"]);
-                                ?>
-                            </p>
-                            
-                            <p>
-                                <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"   value='choice2' >
-                                <?php
-                                    echo $Quiz->Getchoice2($row["Quesid"]);
-                                ?>
-                            </p>
-                            
-                            <p>
-                                <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"  value='choice3' >
-                                <?php
-                                    echo $Quiz->Getchoice3($row["Quesid"]);
-                                ?>
-                            </p>
-                            
-                            <p>
-                                <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"  value='choice4' >
-                                <?php
-                                    echo $Quiz->Getchoice4($row["Quesid"]);
-                                ?>
-                            </p>
-                          </div>    
-                     <?php  }
-                    }
-
-                ?>
-                
-           </div>
-           <div class="col-lg-3">
-               <img class="img-fluid" src="../Images/karlsson-65.png" alt="">
-               <button class="btn btn-primary" name="submit" type="submit">Submit</button>
-           </div>
-       </div>
+        <label for="">Course name</label><br>
+        <input type="text" name="Course" id="Course"><br><br>
+        <button class="btn btn-primary" name="submit" type="submit">Add Course</button>
+       <br><br>
       </form>
+      
     </div>
-        
+    <div>
+          <?php
+          
+             $Quiz=new Quiz();
+            $result= $Quiz->GetNameofCours($_SESSION['email']);
+             if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                   echo $row["CourseName"]." " .$row["Courseid"]. "  ";
+                  
+                 ?> 
+                 
+                  <button class="btn btn-primary" type="button"><a href='../HTML/CreateQuiz.php?id=<?php echo $row["Courseid"]; ?>'> Add Quizes</a></button>
+                  <br><br>
+
+                 
+
+               <?php }
+            }
+         
+          ?>
+
     </div>
-    <div >
+  
+</div>
+<div>
         <footer id="footer">
-    
+
             <a href="#" class="fab fa-facebook"></a>
             <a href="#" class="fab fa-twitter"></a>
             <a href="#" class="fab fa-google"></a>
@@ -163,11 +119,6 @@ header("Location:Home.php");
         </div>
        
     </div>
-    
-</body>
-
-
-
 <script src="../bootstrap/bootstrap.js"></script>
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>

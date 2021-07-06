@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['type']) ||
 !isset($_SESSION['email']))
 header("Location:Login.html");
-if($_SESSION['type']=="Student")
+if($_SESSION['type']=="Student" || empty($_GET['id']))
 header("Location:Home.php");
 ?>
 <!DOCTYPE html>
@@ -65,16 +65,30 @@ header("Location:Home.php");
   <div class="container mt-5 mb-3 ">
     <div class="row">
       <div class="col-lg-4">
-        <form class="login" action ="../PHP/CreateQuiz.php" method="post">
+        <form class="login" method="post" action="../PHP/CreateQuiz.php?id=<?php echo $_GET['id'];?>">
+         <h3>Questions & Answers</h3>
           <div  id="id01">
-            <div class="1">
+            <div class="Quiz">
                 <label for="">Quiz name</label><br>
                 <input type="text" name="Quizname" id="Quizname"><br>
                 <label for="">Grade</label><br>
                 <input type="number" name="Grade" id="Grade" />
                 <br>
-                Q<textarea name="1" class='Ques'></textarea><br><input type='radio' class='Ques' id="6" checked name="6" value='choice1'required ><textarea  class='Ques' name="2"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice2'><textarea name="3"></textarea><br><input type='radio' id="6" class='Ques' name="6" value='choice3'><textarea name="4"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice4'><textarea name="5"></textarea><br>
-                <button class="btn btn-primary" id="6" onclick="nextclick(6)" type="button">Next</button><br><br>
+                <label for="">Date of Quiz</label><br>
+                <input type="date" name="date" id="date">
+                <br>
+                <br>
+                <label for="">Time of start</label><br>
+                <input type="time" name="start" id="start">
+                <br>
+                <br>
+                <label for="">Time of end</label><br>
+                <input type="time" name="end" id="end">
+                <br><br>
+                <button class="btn btn-primary"  onclick="nextclick(0)" type="button">Next</button><br><br>
+              
+                <!-- Q<textarea name="1" class='Ques'></textarea><br><input type='radio' class='Ques' id="6" checked name="6" value='choice1'required ><textarea  class='Ques' name="2"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice2'><textarea name="3"></textarea><br><input type='radio' id="6" class='Ques' name="6" value='choice3'><textarea name="4"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice4'><textarea name="5"></textarea><br>
+                <button class="btn btn-primary" id="6" onclick="nextclick(6)" type="button">Next</button><br><br> -->
             </div>
 
         
@@ -143,39 +157,47 @@ header("Location:Home.php");
     var value = document.getElementsByClassName("Ques");
     
     value=parseInt(value.length);
-    for(let i=1;i<=value;i+=6)
-    {
-        $("."+i).hide();
-       
-
-    }
-    var check=value-5;
-    checks=[value-5,value-4,value-3,value-2,value-1];
-    var done=false;
-    for(let i=0;i<5;i++)
-    {
-        if($("#"+checks[i]).val()=="")
+    if(value>0)
+    { for(let i=1;i<=value;i+=6)
         {
-             done=true;
-        }
-    }
-    if($("#Quizname").val()=="")
-      done=true;
-    
- 
-    if(!done)
-    { elements=[value+1,value+2,value+3,value+4,value+5,value+6];
+            $("."+i).hide();
+        
 
-   
-    $('#id01').append("<div class="+elements[0]+">Q<textarea name="+elements[0]+" id="+elements[0]+" class='Ques'></textarea><br><input type='radio' checked class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice1' ><textarea  class='Ques' name="+elements[1]+" id="+elements[1]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice2'><textarea name="+elements[2]+" id="+elements[2]+">  </textarea><br><input type='radio' id="+elements[5]+" class='Ques' name="+elements[5]+" value='choice3'><textarea name="+elements[3]+" id="+elements[3]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice4'><textarea name="+elements[4]+" id="+elements[4]+"></textarea><br>    <button class='btn btn-primary'  onclick='reply_click("+elements[0]+")'  type='button'>Previous</button>  <button class='btn btn-primary'  onclick='nextclick("+elements[5]+")'  type='button'>Next</button><br><br></div>");  
- 
-  }
-  else
-  {
-      $("."+checks[0]).show();
-   
-  }
- }
+        }
+        var check=value-5;
+        checks=[value-5,value-4,value-3,value-2,value-1];
+        var done=false;
+        for(let i=0;i<5;i++)
+        {
+            if($("#"+checks[i]).val()=="")
+            {
+                done=true;
+            }
+        }
+        if($("#Quizname").val()=="")
+        done=true;
+    
+
+            if(!done)
+            { elements=[value+1,value+2,value+3,value+4,value+5,value+6];
+
+        
+            $('#id01').append("<div class="+elements[0]+">Q<textarea name="+elements[0]+" id="+elements[0]+" class='Ques'></textarea><br><input type='radio' checked class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice1' ><textarea  class='Ques' name="+elements[1]+" id="+elements[1]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice2'><textarea name="+elements[2]+" id="+elements[2]+">  </textarea><br><input type='radio' id="+elements[5]+" class='Ques' name="+elements[5]+" value='choice3'><textarea name="+elements[3]+" id="+elements[3]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice4'><textarea name="+elements[4]+" id="+elements[4]+"></textarea><br>    <button class='btn btn-primary'  onclick='reply_click("+elements[0]+")'  type='button'>Previous</button>  <button class='btn btn-primary'  onclick='nextclick("+elements[5]+")'  type='button'>Next</button><br><br></div>");  
+        
+        }
+        else
+        {
+            $("."+checks[0]).show();
+        
+        }
+     }
+    else
+    {
+        $('.Quiz').hide();
+        elements=[value+1,value+2,value+3,value+4,value+5,value+6]; 
+        $('#id01').append("<div class="+elements[0]+">Q<textarea name="+elements[0]+" id="+elements[0]+" class='Ques'></textarea><br><input type='radio' checked class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice1' ><textarea  class='Ques' name="+elements[1]+" id="+elements[1]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice2'><textarea name="+elements[2]+" id="+elements[2]+">  </textarea><br><input type='radio' id="+elements[5]+" class='Ques' name="+elements[5]+" value='choice3'><textarea name="+elements[3]+" id="+elements[3]+"></textarea><br><input type='radio' class='Ques' id="+elements[5]+" name="+elements[5]+" value='choice4'><textarea name="+elements[4]+" id="+elements[4]+"></textarea><br>    <button class='btn btn-primary'  onclick='reply_click("+elements[0]+")'  type='button'>Previous</button>  <button class='btn btn-primary'  onclick='nextclick("+elements[5]+")'  type='button'>Next</button><br><br></div>");  
+    }
+}
 
 });  
     

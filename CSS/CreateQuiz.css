@@ -14,7 +14,7 @@ button
 h5{
     margin-top: 8%;
 }
-#Quizname,#Grade{
+#Quizname,#Grade,#date,#start,#end{
     position: relative;
     left:8%;
     border-color: #007bff;

@@ -47,3 +47,6 @@ ALTER TABLE teacher ADD ProfilePic text;
 ALTER TABLE student ADD ProfilePic text;
 ALTER TABLE quiz ADD Grade int;
 CREATE TABLE Answers( Quesid int, Answer text, Quizid int , FOREIGN KEY (Quizid) REFERENCES Quiz(Quizid) ,FOREIGN KEY(Quesid) REFERENCES question(Quesid) ,PRIMARY KEY(Quizid,Quesid))
+ALTER TABLE quiz ADD DateofQuiz Date;
+ALTER TABLE quiz ADD startofQuiz time;
+ALTER TABLE quiz ADD EndofQuiz time;

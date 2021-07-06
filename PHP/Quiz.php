@@ -5,11 +5,11 @@ class Quiz
     public function __construct(){
         $this->dbConnection = DBConnection::getInst()->getConnection();
    }
-   public function InsertQuiz($Quizname,$Courseid,$Grade)
+   public function InsertQuiz($Quizname,$Courseid,$Grade,$DateofQuiz, $startofQuiz,$EndofQuiz)
    {
     $this->dbConnection->query("INSERT INTO Quiz (	
         Quizname,
-        Courseid,Grade) VALUES('$Quizname','$Courseid','$Grade')");
+        Courseid,Grade,DateofQuiz, startofQuiz,EndofQuiz) VALUES('$Quizname','$Courseid','$Grade','$DateofQuiz', '$startofQuiz','$EndofQuiz')");
    }
    public function Getname($Quizid)
    {
@@ -24,6 +24,46 @@ class Quiz
     return null;
 
    }
+   public function GetEndofQuiz($Quizid)
+   {
+    $result = $this->dbConnection->query("SELECT EndofQuiz FROM  Quiz WHERE Quizid='$Quizid'");
+    // If the query returns a result
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            return $row["EndofQuiz"];
+        }
+    }
+    return null;
+
+   }
+   public function GetstartofQuiz($Quizid)
+   {
+    $result = $this->dbConnection->query("SELECT startofQuiz FROM  Quiz WHERE Quizid='$Quizid'");
+    // If the query returns a result
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            return $row["startofQuiz"];
+        }
+    }
+    return null;
+
+   }
+   public function GetDateofQuiz($Quizid)
+   {
+    $result = $this->dbConnection->query("SELECT DateofQuiz FROM  Quiz WHERE Quizid='$Quizid'");
+    // If the query returns a result
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            return $row["DateofQuiz"];
+        }
+    }
+    return null;
+
+   }
+
    public function GetGrade($Quizid)
    {
     $result = $this->dbConnection->query("SELECT Grade FROM  Quiz WHERE Quizid='$Quizid'");
@@ -39,11 +79,11 @@ class Quiz
    }
    public function GetQuizid()
    {
-     $result= $this->dbConnection->query("SELECT  COUNT(*) FROM  Quiz");
+     $result= $this->dbConnection->query("SELECT  MAX(Quizid) FROM  Quiz");
      if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-            return $row["COUNT(*)"];
+            return $row["MAX(Quizid)"];
         }
     }
     return null;
@@ -198,6 +238,21 @@ class Quiz
         }
         return null;
     }
+     public function addCousre($CourseName,$teacheremail)
+     {
+        $this->dbConnection->query("INSERT INTO course (CourseName,teacheremail) VALUES('$CourseName','$teacheremail')");
+     
+     }
+    public function GetNameofCours($teacheremail)
+    {
+        
+            $result = $this->dbConnection->query("SELECT CourseName,Courseid FROM  course WHERE teacheremail='$teacheremail'");
+            // If the query returns a result
+           
+            return $result;
+        
+    }
+  
   
 }
 

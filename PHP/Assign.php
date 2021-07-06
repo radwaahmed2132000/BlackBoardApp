@@ -27,7 +27,7 @@
        echo $Grade;
         $Quiz->InsertAssigned($_SESSION['email'],$Quizid,ceil($Grade));
         
-      }
+    }
 
  }
 

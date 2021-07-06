@@ -72,9 +72,22 @@ header("Location:Home.php");
              
                 <?php
                    // id will be changed;????????????????????????
-                   $Quizid=16;
+                   $Quizid=17;
                    $Quiz=new Quiz();
+                   $date=date("Y-m-d");
                   
+                   $time= date("h:i:s");
+                  
+                  if($date< $Quiz->GetDateofQuiz($Quizid) )
+                   {
+                    header("Location:Home.php");
+                   }
+                   else if($date==$Quiz->GetDateofQuiz($Quizid))
+                    if( $time<$Quiz->GetEndofQuiz($Quizid))
+                   {
+                    header("Location:Home.php");
+                        
+                   }
                   $result= $Quiz->GetQuestions($Quizid);
                     // If the query returns a result
                     if ($result->num_rows > 0) {?>
