@@ -4,10 +4,10 @@
  if(isset($_POST["submit"]))
  {
       // id will be changed;????????????????????????
-      $Quizid=15;
+      $Quizid=16;
       $Quiz=new Quiz();
       $result= $Quiz->GetQuestions($Quizid);
-      $Grade=10;
+      $Grade=$Quiz->GetGrade($Quizid);
       // should added as attruibte
       // If the query returns a result
       if ($result->num_rows > 0) {
@@ -17,6 +17,7 @@
         {
           $i++;
             $anwser=$_POST[$row["Quesid"]];
+            $Quiz->InsertAnswers($row["Quesid"], $anwser,$Quizid);
             if($anwser==$Quiz->Getcorrect($row["Quesid"]))
             $j++;
         }

@@ -82,47 +82,122 @@ header("Location:Home.php");
                     
                     <?php
                         // output data of each row
-                        while ($row = $result->fetch_assoc()) {?>
+                        while ($row = $result->fetch_assoc()) {
+                           $myanswer= $Quiz-> Getmyanswer($row["Quesid"],$Quizid);
+                            ?>
                           <div class="Questions">
                             <h5> <?php echo $Quiz-> GetQues($row["Quesid"]);?> </h5>
                             
                             <p>
-                                <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"   value='choice1' >
+                                <?php
+                                  if($myanswer=="choice1")
+                                  {
+                                      ?>
+                                            <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"   checked disabled value='choice1' >
+                                        <?php 
+                                  }
+                                  else
+                                  {
+                                      ?>
+                                       <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"    disabled value='choice1' >
+                                      <?php
+                                  }
+                                ?>
+                               
                                 <?php
                                     echo $Quiz->Getchoice1($row["Quesid"]);
                                 ?>
                             </p>
                             
                             <p>
-                                <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"   value='choice2' >
+                            <?php
+                                  if($myanswer=="choice2")
+                                  {
+                                      ?>
+                                            <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"   checked disabled value='choice2' >
+                                        <?php 
+                                  }
+                                  else
+                                  {
+                                      ?>
+                                       <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"    disabled value='choice2' >
+                                      <?php
+                                  }
+                                ?>
                                 <?php
                                     echo $Quiz->Getchoice2($row["Quesid"]);
                                 ?>
                             </p>
                             
                             <p>
-                                <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"  value='choice3' >
+                            <?php
+                                  if($myanswer=="choice3")
+                                  {
+                                      ?>
+                                            <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"   checked disabled value='choice3' >
+                                        <?php 
+                                  }
+                                  else
+                                  {
+                                      ?>
+                                       <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"    disabled value='choice3' >
+                                      <?php
+                                  }
+                                ?>
                                 <?php
                                     echo $Quiz->Getchoice3($row["Quesid"]);
                                 ?>
                             </p>
                             
                             <p>
-                                <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"  value='choice4' >
+                            <?php
+                                  if($myanswer=="choice4")
+                                  {
+                                      ?>
+                                            <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"   checked disabled value='choice4' >
+                                        <?php 
+                                  }
+                                  else
+                                  {
+                                      ?>
+                                       <input type='radio' class='Ques' name="<?php echo $row["Quesid"];?>"    disabled value='choice4' >
+                                      <?php
+                                  }
+                                ?>
                                 <?php
                                     echo $Quiz->Getchoice4($row["Quesid"]);
                                 ?>
                             </p>
+                            Answer: <?php $Correct=$Quiz->Getcorrect($row["Quesid"]);
+                               if($Correct=="choice1")
+                               {
+                                echo $Quiz->Getchoice1($row["Quesid"]);
+                               }
+                               else if($Correct=="choice2")
+                               {
+                                echo $Quiz->Getchoice2($row["Quesid"]);
+                               }
+                               else if($Correct=="choice3")
+                               {
+                                echo $Quiz->Getchoice3($row["Quesid"]);
+                               }
+                               else if($Correct=="choice4")
+                               {
+                                echo $Quiz->Getchoice4($row["Quesid"]);
+                               }
+                            
+                            ?>
                           </div>    
                      <?php  }
                     }
 
                 ?>
+             
                 
            </div>
            <div class="col-lg-3">
                <img class="img-fluid" src="../Images/karlsson-65.png" alt="">
-               <button class="btn btn-primary" name="submit" type="submit">Submit</button>
+                Grade: <?php echo $Quiz->Getmygrade($_SESSION['email'],$Quizid)  ?> /<?php echo $Quiz->GetGrade($Quizid);?>
            </div>
        </div>
       </form>

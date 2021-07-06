@@ -45,3 +45,5 @@ CREATE TABLE Assigned( studentemail varchar (100), Quizid int, FOREIGN KEY (stud
 CREATE TABLE Review( Reviewid INT AUTO_INCREMENT PRIMARY KEY, content text, studentemail varchar(100), FOREIGN KEY (studentemail) REFERENCES student(email) )
 ALTER TABLE teacher ADD ProfilePic text;
 ALTER TABLE student ADD ProfilePic text;
+ALTER TABLE quiz ADD Grade int;
+CREATE TABLE Answers( Quesid int, Answer text, Quizid int , FOREIGN KEY (Quizid) REFERENCES Quiz(Quizid) ,FOREIGN KEY(Quesid) REFERENCES question(Quesid) ,PRIMARY KEY(Quizid,Quesid))

@@ -10,6 +10,7 @@
      $choice4=$_POST['5'];
      $correct=$_POST['6'];
      $Quizname=$_POST['Quizname'];
+     $Grade=$_POST['Grade'];
      
      $Courseid=1; // it must be changed??????????????????
      // when i add course mist changed
@@ -18,7 +19,7 @@
         echo"<script>alert('Your Question has fields empty'); window.location.href='../HTML/CreateQuiz.php';</script>";
     }
     $Quiz=new Quiz();
-    $Quiz->InsertQuiz($Quizname,$Courseid);
+    $Quiz->InsertQuiz($Quizname,$Courseid,$Grade);
     $Quizid= $Quiz->GetQuizid();
        $Quiz->InsertQuestion(	
         $Ques,
@@ -41,6 +42,7 @@
                 $correct=$_POST[$i++];
                 if(empty($Ques) || empty($choice1) ||empty ($choice2) || empty($choice3) || empty($choice4) || empty($correct))
                 {
+                    echo"<script>alert('Your Question has fields empty'); window.location.href='../HTML/CreateQuiz.php';</script>";
                    break;
                 }
                 $Quiz->InsertQuestion(	

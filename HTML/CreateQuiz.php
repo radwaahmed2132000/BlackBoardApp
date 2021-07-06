@@ -70,6 +70,9 @@ header("Location:Home.php");
             <div class="1">
                 <label for="">Quiz name</label><br>
                 <input type="text" name="Quizname" id="Quizname"><br>
+                <label for="">Grade</label><br>
+                <input type="number" name="Grade" id="Grade" />
+                <br>
                 Q<textarea name="1" class='Ques'></textarea><br><input type='radio' class='Ques' id="6" checked name="6" value='choice1'required ><textarea  class='Ques' name="2"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice2'><textarea name="3"></textarea><br><input type='radio' id="6" class='Ques' name="6" value='choice3'><textarea name="4"></textarea><br><input type='radio' class='Ques' id="6" name="6" value='choice4'><textarea name="5"></textarea><br>
                 <button class="btn btn-primary" id="6" onclick="nextclick(6)" type="button">Next</button><br><br>
             </div>

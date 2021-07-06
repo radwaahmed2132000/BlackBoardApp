@@ -5,11 +5,11 @@ class Quiz
     public function __construct(){
         $this->dbConnection = DBConnection::getInst()->getConnection();
    }
-   public function InsertQuiz($Quizname,$Courseid)
+   public function InsertQuiz($Quizname,$Courseid,$Grade)
    {
     $this->dbConnection->query("INSERT INTO Quiz (	
         Quizname,
-        Courseid) VALUES('$Quizname','$Courseid')");
+        Courseid,Grade) VALUES('$Quizname','$Courseid','$Grade')");
    }
    public function Getname($Quizid)
    {
@@ -19,6 +19,19 @@ class Quiz
         // output data of each row
         while ($row = $result->fetch_assoc()) {
             return $row["Quizname"];
+        }
+    }
+    return null;
+
+   }
+   public function GetGrade($Quizid)
+   {
+    $result = $this->dbConnection->query("SELECT Grade FROM  Quiz WHERE Quizid='$Quizid'");
+    // If the query returns a result
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            return $row["Grade"];
         }
     }
     return null;
@@ -156,6 +169,35 @@ class Quiz
    {
     $this->dbConnection->query("INSERT INTO assigned (studentemail,Quizid,Grade) VALUES('$studentemail','$Quizid','$Grade')");
    }
+   public function InsertAnswers($Quesid,$Answer,$Quizid)
+    {
+        $this->dbConnection->query("INSERT INTO answers (Quesid,Answer,Quizid) VALUES('$Quesid','$Answer','$Quizid')");
+    }
+    public function Getmyanswer($Quesid,$Quizid)
+    {
+        $result = $this->dbConnection->query("SELECT Answer FROM  answers WHERE Quesid='$Quesid' AND Quizid='$Quizid'");
+        // If the query returns a result
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                return $row["Answer"];
+            }
+        }
+        return null;
+
+    }
+    public function Getmygrade($studentemail,$Quizid)
+    {
+        $result = $this->dbConnection->query("SELECT Grade FROM  assigned WHERE studentemail='$studentemail' AND Quizid='$Quizid'");
+        // If the query returns a result
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                return $row["Grade"];
+            }
+        }
+        return null;
+    }
   
 }
 
