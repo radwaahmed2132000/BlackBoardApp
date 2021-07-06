@@ -15,7 +15,7 @@ if($_SESSION['type']=="Student")
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../CSS/Home.css">
     <link rel="stylesheet" href="../CSS/Footer.css">
-    <link rel="stylesheet" href="../CSS/Course.css">
+    <link rel="stylesheet" href="../CSS/Course.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -64,37 +64,61 @@ if($_SESSION['type']=="Student")
    
 </body>
 <div class="container mt-5 mb-3 ">
-    <div class="Quiz">
-        <form class="login" action ="../PHP/addCourse.php" method="post">
+     <div class="row">
+         <div class="col-lg-6">
+             <h4>
+             Good teaching must be slow enough so that it is not confusing, and fast enough so that it is not boring. 
+             </h4>
+             ― Sidney J. Harris
+         </div>
+         <div class="col-lg-6">
+                <div class="Quiz">
+                <form class="login" action ="../PHP/addCourse.php" method="post">
 
-        <label for="">Course name</label><br>
-        <input type="text" name="Course" id="Course"><br><br>
-        <button class="btn btn-primary" name="submit" type="submit">Add Course</button>
-       <br><br>
-      </form>
+                <label for="">Course name</label><br>
+                <input type="text" name="Course" id="Course"><br><br>
+                <button class="btn btn-primary" name="submit" type="submit">Add Course</button>
+            <br><br>
+            </form>
+         </div>
+     </div>
       
     </div>
-    <div>
-          <?php
-          
-             $Quiz=new Quiz();
-            $result= $Quiz->GetNameofCours($_SESSION['email']);
-             if ($result->num_rows > 0) {
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <img class="img-fluid" src="../Images/cyborg-126.png" alt="">
+            </div>
+            <div class="col-lg-6 card">
+                <?php
+
+                $Quiz=new Quiz();
+                $result= $Quiz->GetNameofCours($_SESSION['email']);
+                if ($result->num_rows > 0) {
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
-                   echo $row["CourseName"]." " .$row["Courseid"]. "  ";
-                  
-                 ?> 
-                 
-                  <button class="btn btn-primary" type="button"><a href='../HTML/CreateQuiz.php?id=<?php echo $row["Courseid"]; ?>'> Add Quizes</a></button>
-                  <br><br>
+                    echo $row["CourseName"]." " .$row["Courseid"]. "  ";
+                    
+                    ?> 
+                    
+                    <div>
+                    <button class="btn btn-primary" type="button"><a href='../HTML/CreateQuiz.php?id=<?php echo $row["Courseid"]; ?>'> Add Quizes</a></button>
+                    <button class="btn btn-primary" type="button"><a href='../HTML/QuizofTeacher.php?id=<?php echo $row["Courseid"]; ?>'> Show &Edit Quizes</a></button>
+                    
 
-                 
+                    </div>    
+                    <br><br>
 
-               <?php }
-            }
+                    
+
+                <?php }
+                }
+
+                ?>
+            </div>
+
+        </div>
          
-          ?>
 
     </div>
   

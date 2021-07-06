@@ -1,12 +1,19 @@
 #Course
 {
-    position: relative;
-    left:8%;
+    /* position: relative;
+    left:8%; */
     border-color: #007bff;
     border-radius: 4px;
     outline:none;
-    margin-bottom: 5px
+    /* margin-bottom: 5px */
 }
 a{
     color:white;
 }
+.card
+{
+    background-color: rgb(130, 199, 255);
+    border-radius:1px 1px;
+    box-shadow: 4px 3px 8px 1px #969696;
+}
+

@@ -252,7 +252,26 @@ class Quiz
             return $result;
         
     }
-  
+    public function DeleteQuiz($Quizid)
+    {
+        $this->dbConnection->query("DELETE FROM quiz WHERE Quizid='$Quizid'");
+    }
+    public function DeleteAssigned($Quizid)
+    {
+        $this->dbConnection->query("DELETE FROM assigned WHERE Quizid='$Quizid'");
+    }
+    public function Deleteanswers($Quizid)
+    {
+        $this->dbConnection->query("DELETE FROM answers WHERE Quizid='$Quizid'");
+    }
+    public function DeleteFromQues($Quizid)
+    {
+        $this->dbConnection->query("DELETE FROM question WHERE Quizid='$Quizid'");
+    }
+    public function GetID($Courseid)
+    {
+      return  $this->dbConnection->query("SELECT Quizid FROM quiz WHERE Courseid='$Courseid'");
+    }
   
 }
 
