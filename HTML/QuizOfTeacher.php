@@ -89,9 +89,9 @@ header("Location:Home.php");
                     if ($result->num_rows > 0) {?>
                        <div class="options">
                           <h3><?php echo $Quiz-> Getname($Quizid);?></h3>
-                          <button class="btn btn-danger" type="button"><a href="../PHP/DeleteQuiz.php?id=<?php echo $Quizid?>">Delete</a></button>
+                          <button class="btn btn-danger" type="button"><a href="../PHP/DeleteQuiz.php?id=<?php echo $Quizid?>">Delete Quiz</a></button>
                                
-                               <button class="btn btn-primary" type="button"><a href="../PHP/EditQuiz.php?id=<?php echo $Quizid?>">Edit </a></button>    
+                               <button class="btn btn-primary" type="button"><a href="EditQuiz.php?id=<?php echo $Quizid?>">Edit Quiz </a></button>    
                       </div>   
                     
                     <?php
@@ -182,7 +182,9 @@ header("Location:Home.php");
                                     echo $Quiz->Getchoice4($row["Quesid"]);
                                 ?>
                             </p>
-                            
+                            <button class="btn btn-danger" type="button"><a href="../PHP/DeleteQuiz.php?id=<?php echo $Quizid?>">Delete Question</a></button>
+                               
+                               <button class="btn btn-primary" type="button"><a href="EditQuestion.php?id=<?php echo $row["Quesid"];?>">Edit Question </a></button>    
                               
                                     
                                  

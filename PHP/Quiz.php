@@ -272,6 +272,22 @@ class Quiz
     {
       return  $this->dbConnection->query("SELECT Quizid FROM quiz WHERE Courseid='$Courseid'");
     }
+    public function UpdateQuiz($Quizname,$Grade,$DateofQuiz, $startofQuiz,$EndofQuiz,$Quizid)
+    {
+        $this->dbConnection->query("UPDATE quiz SET Quizname='$Quizname',Grade='$Grade',DateofQuiz='$DateofQuiz',startofQuiz='$startofQuiz',EndofQuiz='$EndofQuiz' WHERE Quizid='$Quizid' ");
+
+    }
+    public function UpdateQuestion(	
+        $Ques,
+        $choice1,
+        $choice2,
+        $choice3,
+        $choice4,
+        $correct,
+        $id)
+        {
+            $this->dbConnection->query("UPDATE question SET Ques='$Ques',choice1='$choice1',choice2='$choice2',choice3='$choice3',choice4='$choice4',correct='$correct' WHERE Quesid='$id' ");
+        }
   
 }
 
