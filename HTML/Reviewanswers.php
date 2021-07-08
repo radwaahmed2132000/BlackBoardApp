@@ -4,7 +4,7 @@ session_start();
 if(!isset($_SESSION['type']) ||
 !isset($_SESSION['email']))
 header("Location:Login.html");
-if($_SESSION['type']=="Teacher")
+if($_SESSION['type']=="Teacher" ||empty($_GET['id']))
 header("Location:Home.php");
 ?> -->
 <!DOCTYPE html>
@@ -71,8 +71,8 @@ header("Location:Home.php");
            <div class="col-lg-6">
              
                 <?php
-                   // id will be changed;????????????????????????
-                   $Quizid=17;
+                  
+                   $Quizid=$_GET['id'];
                    $Quiz=new Quiz();
                    $date=date("Y-m-d");
                   

@@ -1,11 +1,11 @@
 <?php
-require_once '../PHP/Quiz.php';
+ require_once '../PHP/Quiz.php';
 session_start();
 if(!isset($_SESSION['type']) ||
 !isset($_SESSION['email']))
 header("Location:Login.html");
-// if($_SESSION['type']=="Student")
-//  header("Location:Home.php");
+if($_SESSION['type']=="Teacher")
+header("Location:Home.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@ header("Location:Login.html");
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../CSS/Home.css">
     <link rel="stylesheet" href="../CSS/Footer.css">
-    <link rel="stylesheet" href="../CSS/Course.css"> 
+    <link rel="stylesheet" href="../CSS/QuizOfTeacher.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -26,7 +26,7 @@ header("Location:Login.html");
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course</title>
+    <title>QuizOfTeacher</title>
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
@@ -61,105 +61,81 @@ header("Location:Login.html");
     </nav>
 </header>
 <body>
-   
-</body>
-<div class="container mt-5 mb-3 ">
-     <div class="row">
-         <div class="col-lg-6">
-             <h4>
-             Good teaching must be slow enough so that it is not confusing, and fast enough so that it is not boring. 
-             </h4>
-             ― Sidney J. Harris
-         </div>
-         <div class="col-lg-6">
-                <div class="Quiz">
-               
-         <?php
-           if($_SESSION['type']=="Teacher")
-           {
-               ?>
-                     <form class="login" action ="../PHP/addCourse.php" method="post">
-                    <label for="">Course name</label><br>
-                      <input type="text" name="Course" id="Course"><br><br>
-                      <button class="btn btn-primary" name="submit" type="submit">Add Course</button>
-                      <br><br>
-                   </form> 
+   <div class="container mt-5 ">
+      <form method="post" action="../PHP/Assign.php">  
+       <div class="row">
+           <div class="col-lg-3">
+                <img class="img-fluid" src="../Images/clip-school-assignment.png" alt="">
 
-               <?php
-           }
-           else
-           {
-               ?>
-                     <form class="login" action ="../PHP/EnrollCourse.php" method="post">
-                     <label for="">Course ID</label><br>
-                      <input type="number" name="ID" id="Course"><br>
-                      <label for="">Teacher Mail</label><br>
-                      <input type="email" name="email" id="email"><br><br>
-                      <button class="btn btn-primary" name="submit" type="submit">Add Course</button>
-                      <br><br>
-                   </form> 
+           </div>
+           <div class="col-lg-6">
+          
+           <?php
 
+                   // id will be changed;????????????????????????
+                  
+                  $Courseid=$_GET['id'];
+                  if(empty($_GET['id']))
+                  header("Location:Home.php");
+                   $Quiz=new Quiz();
+                  $ids=$Quiz->GetID($Courseid);
+                 if($ids->num_rows > 0) 
+                 {
+                    while ($id = $ids->fetch_assoc())
+                   { 
+                       $Quizid=$id['Quizid'];
+                      $result= $Quiz->GetQuestions($Quizid);
+                    // If the query returns a result
+                    if ($result->num_rows > 0) {?>
+ 
+                    <?php
+                        // output data of each row
+                        while ($row = $result->fetch_assoc()) {
+                         
+                            ?>
+                          <div class="Questions">
+                          <h5><?php echo $Quiz-> Getname($Quizid);?></h5>
+                            <p>
 
-               <?php
-           }
-         
-           ?>
-                
-         </div>
-     </div>
-      
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <img class="img-fluid" src="../Images/cyborg-126.png" alt="">
-            </div>
-            <div class="col-lg-6 card">
-                <?php
-
-                $Quiz=new Quiz();
-                if($_SESSION['type']=="Teacher")
-               { $result= $Quiz->GetNameofCours($_SESSION['email']);
-                if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo $row["CourseName"]." " .$row["Courseid"]. "  ";
-                    
-                    ?> 
-                    
-                    <div>
-                      
-                                <button class="btn btn-primary" type="button"><a href='../HTML/CreateQuiz.php?id=<?php echo $row["Courseid"]; ?>'> Add Quizes</a></button>
-                                 <button class="btn btn-primary" type="button"><a href='../HTML/QuizofTeacher.php?id=<?php echo $row["Courseid"]; ?>'> Show &Edit Quizes</a></button>
-                        
-                    
-
-                    </div>    
-                    <br><br>
-
-                    
-
-                <?php }
+                        <?php
+                           echo $Quiz-> GetDateofQuiz($Quizid)."   ";
+                           
+                           echo $Quiz->GetstartofQuiz($Quizid)."   ";
+                           echo $Quiz->GetEndofQuiz($Quizid)."   <br>";
+                         ?>
+                           </p>
+                           
+                           
+                            
+                         <button class="btn btn-primary" type="button"><a href="Quiz.php?id=<?php echo $Quizid;?>">Start Quiz</a></button>
+                         <button class="btn btn-primary" type="button"><a href="Reviewanswers.php?id=<?php echo $Quizid;?>">Review Answers</a></button>  
+                          
+                              
+                                    
+                                 
+                                
+                                
+                        </div>    
+                     <?php  }
+                    }
                 }
-            }
-            else
-            {
-              $Quiz->GetEnrolled($_SESSION['email']);
-
-            }
+                }
 
                 ?>
-            </div>
-
-        </div>
-         
-
+                  
+           </div>
+           <div class="col-lg-3">
+               <img class="img-fluid" src="../Images/karlsson-65.png" alt="">
+               
+           </div>
+       </div>
+      </form>
     </div>
-  
-</div>
-<div>
+        
+    </div>
+    <div>
         <footer id="footer">
-
+    
             <a href="#" class="fab fa-facebook"></a>
             <a href="#" class="fab fa-twitter"></a>
             <a href="#" class="fab fa-google"></a>
@@ -177,6 +153,11 @@ header("Location:Login.html");
         </div>
        
     </div>
+    
+</body>
+
+
+
 <script src="../bootstrap/bootstrap.js"></script>
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>

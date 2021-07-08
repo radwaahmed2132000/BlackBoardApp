@@ -208,7 +208,19 @@ class Quiz
    }
    public function GetCoursename($teacheremail,$Courseid)
    {
-    $result = $this->dbConnection->query("SELECT CourseName FROM  course WHERE teacheremail='$teacheremail' AND CourseName='$CourseName'");
+    $result = $this->dbConnection->query("SELECT CourseName FROM  course WHERE teacheremail='$teacheremail' AND Courseid='$Courseid'");
+    // If the query returns a result
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            return $row["CourseName"];
+        }
+    }
+    return null;
+   }
+   public function GetCNames($Courseid)
+   {
+    $result = $this->dbConnection->query("SELECT CourseName FROM  course WHERE  Courseid='$Courseid'");
     // If the query returns a result
     if ($result->num_rows > 0) {
         // output data of each row
@@ -323,6 +335,32 @@ class Quiz
      return null;
  
     }
+    public function EnrollCourse($Courseid,$emailstudent)
+    {
+        $this->dbConnection->query("INSERT INTO enrollcourse (Courseid,emailstudent) VALUES('$Courseid','$emailstudent')");
+    }
+    public function GetEnrolled($emailstudent)
+    {
+
+     $result = $this->dbConnection->query("SELECT Courseid FROM  enrollcourse WHERE emailstudent='$emailstudent'");
+     // If the query returns a result
+     if ($result->num_rows > 0) {
+         // output data of each row
+         while ($row = $result->fetch_assoc()) {?>
+            <?php echo $this->GetCNames($row["Courseid"]) ;?>
+           
+            <div class="Courses mt-2">
+            <button class="btn btn-primary" type="button"><a href='../HTML/ViewQuizes.php?id=<?php echo $row["Courseid"]; ?>'> View Quizes</a></button>
+         </div>
+            <?php
+         }
+     }
+     return null;
+ 
+    }
+    
+
+
     
   
 }
