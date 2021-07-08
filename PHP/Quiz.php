@@ -112,6 +112,18 @@ class Quiz
     return null;
 
    }
+   public function countquestions($Quizid)
+   {
+    $result= $this->dbConnection->query("SELECT COUNT(*) FROM  question WHERE Quizid='$Quizid'");
+    if ($result->num_rows > 0) {
+       // output data of each row
+       while ($row = $result->fetch_assoc()) {
+           return $row["COUNT(*)"];
+       }
+   }
+   return null;
+       
+   }
    public function Getchoice1($Quesid	)
    {
     $result = $this->dbConnection->query("SELECT choice1 FROM  question WHERE Quesid='$Quesid'");
@@ -177,6 +189,7 @@ class Quiz
     return null;
 
    }
+  
    public function GetQuestions($Quizid	)
    {
     $result = $this->dbConnection->query("SELECT Quesid FROM  question WHERE Quizid='$Quizid'");
@@ -288,6 +301,29 @@ class Quiz
         {
             $this->dbConnection->query("UPDATE question SET Ques='$Ques',choice1='$choice1',choice2='$choice2',choice3='$choice3',choice4='$choice4',correct='$correct' WHERE Quesid='$id' ");
         }
+        public function DeleteQues($Quesid)
+    {
+        
+        $this->dbConnection->query("DELETE FROM question WHERE Quesid='$Quesid'");
+    }
+    public function DeleteAnswer($Quesid)
+    {
+        $this->dbConnection->query("DELETE FROM answers WHERE Quesid='$Quesid'");
+    }
+    public function GetQuizids($Quesid)
+    {
+     $result = $this->dbConnection->query("SELECT Quizid FROM  question WHERE Quesid='$Quesid'");
+     // If the query returns a result
+     if ($result->num_rows > 0) {
+         // output data of each row
+         while ($row = $result->fetch_assoc()) {
+             return $row["Quizid"];
+         }
+     }
+     return null;
+ 
+    }
+    
   
 }
 

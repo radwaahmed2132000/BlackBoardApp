@@ -9,6 +9,18 @@ function reply_click(id)
      }
    
 }
+function Reply(id)
+{
+    $("."+id).hide();
+    id=id-6;
+    $("."+id).show();
+    if(id<=0)
+    {
+       $('.1').show();
+    }
+
+}
+
 
 function nextclick(id)
 {
