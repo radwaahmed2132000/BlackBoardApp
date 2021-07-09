@@ -72,7 +72,7 @@ header("Location:Home.php");
           
            <?php
 
-                   // id will be changed;????????????????????????
+                   
                   
                   $Courseid=$_GET['id'];
                   if(empty($_GET['id']))
@@ -84,13 +84,13 @@ header("Location:Home.php");
                     while ($id = $ids->fetch_assoc())
                    { 
                        $Quizid=$id['Quizid'];
-                      $result= $Quiz->GetQuestions($Quizid);
+                    
                     // If the query returns a result
-                    if ($result->num_rows > 0) {?>
+                    if ($ids->num_rows > 0) {?>
  
                     <?php
                         // output data of each row
-                        while ($row = $result->fetch_assoc()) {
+                      
                          
                             ?>
                           <div class="Questions">
@@ -102,13 +102,22 @@ header("Location:Home.php");
                            
                            echo $Quiz->GetstartofQuiz($Quizid)."   ";
                            echo $Quiz->GetEndofQuiz($Quizid)."   <br>";
+
+                           $myGrade= $Quiz-> Getmygrade($_SESSION['email'],$Quizid);
+                          
+                           $Grade=$Quiz->GetGrade($Quizid);
+                           if($Grade!=null)
+                           {
+                               echo "Grade: ".$myGrade."/".$Grade;
+                           }
+                           
                          ?>
                            </p>
                            
                            
                             
                          <button class="btn btn-primary" type="button"><a href="Quiz.php?id=<?php echo $Quizid;?>">Start Quiz</a></button>
-                         <button class="btn btn-primary" type="button"><a href="Reviewanswers.php?id=<?php echo $Quizid;?>">Review Answers</a></button>  
+                         <button class="btn btn-primary" type="button"><a href="Reviewanswers.php?id=<?php echo $Quizid;?>&studentemail=<?php echo $_SESSION['email']; ?>">Review Answers</a></button>  
                           
                               
                                     
@@ -119,7 +128,7 @@ header("Location:Home.php");
                      <?php  }
                     }
                 }
-                }
+                
 
                 ?>
                   

@@ -3,8 +3,8 @@
  session_start();
  if(isset($_POST["submit"]))
  {
-      // id will be changed;????????????????????????
-      $Quizid=16;
+      
+      $Quizid=$_GET['id'];
       $Quiz=new Quiz();
       $result= $Quiz->GetQuestions($Quizid);
       $Grade=$Quiz->GetGrade($Quizid);
@@ -17,7 +17,7 @@
         {
           $i++;
             $anwser=$_POST[$row["Quesid"]];
-            $Quiz->InsertAnswers($row["Quesid"], $anwser,$Quizid);
+            $Quiz->InsertAnswers($row["Quesid"], $anwser,$Quizid,$_SESSION['email']);
             if($anwser==$Quiz->Getcorrect($row["Quesid"]))
             $j++;
         }
@@ -26,7 +26,8 @@
        echo $Quizid;
        echo $Grade;
         $Quiz->InsertAssigned($_SESSION['email'],$Quizid,ceil($Grade));
-        
+        echo'<script>alert("Quiz Submitted Successfuly");window.location.href="../HTML/Home.php";</script>';
+
     }
 
  }

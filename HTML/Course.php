@@ -131,7 +131,8 @@ header("Location:Login.html");
                       
                                 <button class="btn btn-primary" type="button"><a href='../HTML/CreateQuiz.php?id=<?php echo $row["Courseid"]; ?>'> Add Quizes</a></button>
                                  <button class="btn btn-primary" type="button"><a href='../HTML/QuizofTeacher.php?id=<?php echo $row["Courseid"]; ?>'> Show &Edit Quizes</a></button>
-                        
+                                 <button class="btn btn-primary" type="button"><a href='../HTML/Students.php?id=<?php echo $row["Courseid"]; ?>'> View Students</a></button>
+
                     
 
                     </div>    

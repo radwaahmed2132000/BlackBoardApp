@@ -190,7 +190,7 @@ class Quiz
 
    }
   
-   public function GetQuestions($Quizid	)
+   public function GetQuestions($Quizid)
    {
     $result = $this->dbConnection->query("SELECT Quesid FROM  question WHERE Quizid='$Quizid'");
     return $result;
@@ -234,13 +234,13 @@ class Quiz
    {
     $this->dbConnection->query("INSERT INTO assigned (studentemail,Quizid,Grade) VALUES('$studentemail','$Quizid','$Grade')");
    }
-   public function InsertAnswers($Quesid,$Answer,$Quizid)
+   public function InsertAnswers($Quesid,$Answer,$Quizid,$studentemail)
     {
-        $this->dbConnection->query("INSERT INTO answers (Quesid,Answer,Quizid) VALUES('$Quesid','$Answer','$Quizid')");
+        $this->dbConnection->query("INSERT INTO answers (Quesid,Answer,Quizid,emailstudent) VALUES('$Quesid','$Answer','$Quizid','$studentemail')");
     }
-    public function Getmyanswer($Quesid,$Quizid)
+    public function Getmyanswer($Quesid,$Quizid,$studentemail)
     {
-        $result = $this->dbConnection->query("SELECT Answer FROM  answers WHERE Quesid='$Quesid' AND Quizid='$Quizid'");
+        $result = $this->dbConnection->query("SELECT Answer FROM  answers WHERE Quesid='$Quesid' AND Quizid='$Quizid' AND emailstudent='$studentemail'");
         // If the query returns a result
         if ($result->num_rows > 0) {
             // output data of each row
@@ -255,14 +255,24 @@ class Quiz
     {
         $result = $this->dbConnection->query("SELECT Grade FROM  assigned WHERE studentemail='$studentemail' AND Quizid='$Quizid'");
         // If the query returns a result
+        // echo $Quizid;
         if ($result->num_rows > 0) {
             // output data of each row
+          
             while ($row = $result->fetch_assoc()) {
                 return $row["Grade"];
             }
         }
         return null;
     }
+    public function UpdateMygrade($studentemail,$Quizid ,$Grade)
+    {
+        $this->dbConnection->query("UPDATE assigned SET Grade='$Grade'  WHERE studentemail='$studentemail' AND Quizid='$Quizid' ");
+    }
+    // public function UpdateAll()
+    // {
+
+    // }
      public function addCousre($CourseName,$teacheremail)
      {
         $this->dbConnection->query("INSERT INTO course (CourseName,teacheremail) VALUES('$CourseName','$teacheremail')");
@@ -288,6 +298,14 @@ class Quiz
     public function Deleteanswers($Quizid)
     {
         $this->dbConnection->query("DELETE FROM answers WHERE Quizid='$Quizid'");
+    }
+    public function DeleteAssignedbyEmail($Quizid,$studentemail)
+    {
+        $this->dbConnection->query("DELETE FROM assigned WHERE Quizid='$Quizid' AND studentemail='$studentemail'");
+    }
+    public function DeleteanswersbyEmail($Quizid,$emailstudent)
+    {
+        $this->dbConnection->query("DELETE FROM answers WHERE Quizid='$Quizid' AND emailstudent='$emailstudent'");
     }
     public function DeleteFromQues($Quizid)
     {
@@ -357,6 +375,12 @@ class Quiz
      }
      return null;
  
+    }
+    public function GetStudents($Courseid)
+    {
+        $result = $this->dbConnection->query("SELECT emailstudent FROM  enrollcourse WHERE Courseid='$Courseid'");
+     
+        return $result;
     }
     
 

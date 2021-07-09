@@ -21,16 +21,18 @@
      $startofQuiz =$_POST['start'];
      $EndofQuiz= $_POST['end'];
      $Courseid=$_GET['id'];
+     echo $Courseid;
      // when i add course mist changed
     if(empty($Ques) || empty($choice1) ||empty ($choice2) || empty($choice3) || empty($choice4) || empty($correct) || empty($Quizname) || empty($DateofQuiz) ||empty($startofQuiz) ||empty($EndofQuiz))
     {
         echo"<script>alert('Your Question has fields empty'); window.location.href='../HTML/Course.php';</script>";
     }
-    else if( $startofQuiz>=  $EndofQuiz)
-    {
-        echo"<script>alert('Invalid Time for Quiz!!'); window.location.href='../HTML/Course.php';</script>";
+    // else if( $startofQuiz>=  $EndofQuiz)
+    // {
+    //     echo "kkk"
+    //     echo"<script>alert('Invalid Time for Quiz!!'); window.location.href='../HTML/Course.php';</script>";
 
-    }
+    // }
     else if( $DateofQuiz<date("Y-m-d"))
     {
         echo"<script>alert('Invalid Date for Quiz'); window.location.href='../HTML/Course.php';</script>";
