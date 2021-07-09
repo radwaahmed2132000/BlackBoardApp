@@ -1,8 +1,7 @@
 <?php
  require_once 'Quiz.php';
  session_start();
- if(isset($_POST["submit"]))
- {
+
       
       $Quizid=$_GET['id'];
       $Quiz=new Quiz();
@@ -26,11 +25,11 @@
        echo $Quizid;
        echo $Grade;
         $Quiz->InsertAssigned($_SESSION['email'],$Quizid,ceil($Grade));
-        echo'<script>alert("Quiz Submitted Successfuly");window.location.href="../HTML/Home.php";</script>';
+       // echo'<script>alert("Quiz Submitted Successfuly");window.location.href="../HTML/Home.php";</script>';
 
     }
 
- }
+
 
 
 ?>

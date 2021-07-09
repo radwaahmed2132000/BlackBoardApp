@@ -62,14 +62,13 @@ header("Location:Home.php");
 </header>
 <body>
    <div class="container mt-5 ">
-      <form method="post" action="../PHP/Assign.php?id=<?php echo $_GET['id'];?>">  
+      <form method="post"  id="myform" name="myform"action="../PHP/Assign.php?id=<?php echo $_GET['id'];?>">  
        <div class="row">
            <div class="col-lg-3">
                 <img class="img-fluid" src="../Images/clip-school-assignment.png" alt="">
 
            </div>
            <div class="col-lg-6">
-             
                 <?php
                    // id will be changed;????????????????????????
                    $Quizid=$_GET['id'];
@@ -137,7 +136,7 @@ header("Location:Home.php");
            </div>
            <div class="col-lg-3">
                <img class="img-fluid" src="../Images/karlsson-65.png" alt="">
-               <button class="btn btn-primary" name="submit" type="submit">Submit</button>
+               <button class="btn btn-primary" name="submit"  value = "Submit" type="submit">Submit</button>
            </div>
        </div>
       </form>
@@ -168,8 +167,45 @@ header("Location:Home.php");
 </body>
 
 
-
-<script src="../bootstrap/bootstrap.js"></script>
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>
+<script src="../bootstrap/bootstrap.js"></script>
+
+<script>
+
+
+
+
+var quiztime='<?php echo $Quiz-> GetstartofQuiz($Quizid);?>';
+var end='<?php echo $Quiz-> GetEndofQuiz($Quizid);?>';
+
+
+ // Get today's date and time
+ 
+
+// console.log(x);
+setInterval(function(){ 
+    var currentDate =new Date();
+    var x= currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+    if(x>=end)
+    {
+        console.log("Terminate");
+        var xmlhttp;
+      
+        console.log(x);
+           
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for older browsers
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+          
+            xmlhttp.open("POST", "../PHP/Assign.php?id=<?php echo $_GET['id'];?>", true);
+            xmlhttp.send();
+       
+    }
+
+}, 1000);
+</script>
 </html>

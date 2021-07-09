@@ -91,7 +91,7 @@ header("Location:Login.html");
         </div>
        
     </div>
-<script src="../bootstrap/bootstrap.js"></script>
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>
+<script src="../bootstrap/bootstrap.js"></script>
 </html>

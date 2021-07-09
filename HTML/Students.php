@@ -26,6 +26,7 @@ require_once '../PHP/Quiz.php';
     <link rel="stylesheet" href="../CSS/Home.css">
     <link rel="stylesheet" href="../CSS/Footer.css">
     <link rel="stylesheet" href="../CSS/User.css">
+    <link rel="stylesheet" href="../CSS/Course.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
@@ -73,11 +74,26 @@ require_once '../PHP/Quiz.php';
 <body>
    
 </body>
+<div class="container  mt-5 mb-3">
+               <div class="col">
+                   <form class="login" action ="../PHP/addStudent.php" method="post">
+                    <label for="">Course ID</label><br>
+                      <input type="text" name="id" id="Course"><br><br>
+                      <label for="">Student  email</label><br>
+                      <input type="email" name="email" id="Course"><br><br>
+                      <button class="btn btn-primary" name="submit" type="submit">Add Student</button>
+                      <br><br>
+                   </form> 
+             </div>
+             <div class="col">
+
+             </div>
+</div>
 <div class="container mt-5 mb-3 ">
     <div>
         <div class="row">
-      
-
+           
+          
                     <?php
                     $Quiz=new Quiz();
                     $result=$Quiz-> GetStudents($_GET['id']);
@@ -107,6 +123,7 @@ require_once '../PHP/Quiz.php';
                     <?php    echo $row["emailstudent"];?>
                     <br><br>
                     <button class="btn btn-primary" type="button"><a href="QuizeOfStudent.php?email=<?php echo $row["emailstudent"];?>&id=<?php echo $_GET['id']; ?>">View Quizes</a></button>
+                    <button class="btn btn-danger" type="button"><a href="../PHP/RemoveStudent.php?email=<?php echo $row["emailstudent"];?>&id=<?php echo $_GET['id']; ?>">Remove Student</a></button>
             </div>
                             <?php
                                

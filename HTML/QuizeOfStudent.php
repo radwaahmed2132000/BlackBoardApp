@@ -93,11 +93,11 @@ header("Location:Home.php");
                   
                    $time= date("h:i:s");
                 //    && $time>=$Quiz->GetEndofQuiz($Quizid)
-                
-                if(  !empty($Quiz-> Getmygrade($_GET['email'],$Quizid)))
+                $Gr=$Quiz-> Getmygrade($_GET['email'],$Quizid);
+                 if( isset($Gr))
                   if($date>= $Quiz->GetDateofQuiz($Quizid)  )
                    {
-                       
+                     
                   
                     // If the query returns a result
                     if ($result->num_rows > 0) {
@@ -107,6 +107,9 @@ header("Location:Home.php");
                         ?>
                        <div class="options">
                           <h3><?php echo $Quiz-> Getname($Quizid);?></h3>
+                          <br>
+                          Grade: <?php echo $Quiz->Getmygrade($_GET['email'],$Quizid)  ?> /<?php echo $Quiz->GetGrade($Quizid);?>
+     
                           <button class="btn btn-danger" type="button"><a href="../PHP/DeleteQuizOfStudent.php?id=<?php echo $Quizid?>&email=<?php echo $_GET['email'];?>">Delete Quiz</a></button>
                                
                                <button class="btn btn-primary" type="button"><a href="EditGrade.php?id=<?php echo $Quizid?>&email=<?php echo $_GET['email'];?>">Edit Quiz Grade </a></button>    
@@ -223,7 +226,7 @@ header("Location:Home.php");
                                }
                             ?> 
                             <br>     
-                               Grade: <?php echo $Quiz->Getmygrade($_GET['email'],$Quizid)  ?> /<?php echo $Quiz->GetGrade($Quizid);?>
+                            
                                  
                                 
                                 

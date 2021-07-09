@@ -307,6 +307,14 @@ class Quiz
     {
         $this->dbConnection->query("DELETE FROM answers WHERE Quizid='$Quizid' AND emailstudent='$emailstudent'");
     }
+    public function DeleteAssignedbyEmails($studentemail)
+    {
+        $this->dbConnection->query("DELETE FROM assigned WHERE studentemail='$studentemail'");
+    }
+    public function DeleteanswersbyEmails($emailstudent)
+    {
+        $this->dbConnection->query("DELETE FROM answers WHERE emailstudent='$emailstudent'");
+    }
     public function DeleteFromQues($Quizid)
     {
         $this->dbConnection->query("DELETE FROM question WHERE Quizid='$Quizid'");
@@ -381,6 +389,10 @@ class Quiz
         $result = $this->dbConnection->query("SELECT emailstudent FROM  enrollcourse WHERE Courseid='$Courseid'");
      
         return $result;
+    }
+    public function DeleteFromEnrolled($Courseid ,$emailstudent)
+    {
+        $this->dbConnection->query("DELETE FROM  enrollcourse WHERE emailstudent='$emailstudent' AND  Courseid='$Courseid'");
     }
     
 
