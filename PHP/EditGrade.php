@@ -11,13 +11,13 @@ if(isset($_POST["submit"]))
    $QuizGrade=  $Quiz->GetGrade($Quizid);
    if(empty($Grade) ||  $Grade<0  ||$Grade>$QuizGrade)
    {
-    echo'<script>alert("Grade not valid");window.location.href="../HTML/Home.php";</script>';
+    echo'<script>alert("Grade not valid");window.location.href="../HTML/Course.php";</script>';
    }  
    else
    {
      
         $Quiz-> UpdateMygrade($studentemail,$Quizid ,$Grade);
-        echo'<script>alert("Grade has been edited");window.location.href="../HTML/Home.php";</script>';
+        echo'<script>alert("Grade has been edited");window.location.href="../HTML/Course.php";</script>';
     }
 
 }

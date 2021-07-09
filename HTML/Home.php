@@ -34,7 +34,7 @@ header("Location:Login.html");
             <ul class="navbar-nav mr-auto navs">
                 
                         <li class="nav-item">
-                            <a class="nav-link active" href="">Home</a>
+                            <a class="nav-link active" href="Home.php">Home</a>
                         </li>
                  
 
@@ -42,7 +42,7 @@ header("Location:Login.html");
                     <a class="nav-link" href="">User Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Courses</a>
+                    <a class="nav-link" href="Course.php">Courses</a>
                 </li>
 
                

@@ -40,7 +40,7 @@ header("Location:Home.php");
             <ul class="navbar-nav mr-auto navs">
                 
                         <li class="nav-item">
-                            <a class="nav-link active" href="">Home</a>
+                            <a class="nav-link active" href="Home.php">Home</a>
                         </li>
                  
 
@@ -48,7 +48,7 @@ header("Location:Home.php");
                     <a class="nav-link" href="">User Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Courses</a>
+                    <a class="nav-link" href="Course.php">Courses</a>
                 </li>
 
                
@@ -221,7 +221,18 @@ header("Location:Home.php");
     </div>
         
     </div>
-    <div >
+    <div class="container">
+       <div class="row">
+           <div class="col-lg-3">
+                <h5>“Prepare well! Take two inks; you may never know when one pen will stop writing!”</h5>
+                ― Ernest Agyemang Yeboah
+           </div>
+           <div class="col-lg-9">
+               <img class="img-fluid" src="../Images/spot-talent.png" alt="">
+           </div>
+       </div>    
+    </div>
+    <div>
         <footer id="footer">
     
             <a href="#" class="fab fa-facebook"></a>
