@@ -5,6 +5,11 @@ if(!isset($_SESSION['type']) ||
 header("Location:Login.html");
 if($_SESSION['type']=="Student" || empty($_GET['id']))
 header("Location:Home.php");
+require_once '../PHP/Quiz.php';
+$Quiz=new Quiz();
+$teacheremail=$Quiz->GetTeacheremail($_GET['id']);
+if($teacheremail!=$_SESSION['email'])
+header("Location:Home.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -230,6 +230,20 @@ class Quiz
     }
     return null;
    }
+   public function GetTeacheremail($Courseid)
+   {
+    $result = $this->dbConnection->query("SELECT teacheremail FROM  course WHERE  Courseid='$Courseid'");
+    // If the query returns a result
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            return $row["teacheremail"];
+        }
+    }
+    return null;
+
+   }
+    
    public function InsertAssigned($studentemail,$Quizid,$Grade)
    {
     $this->dbConnection->query("INSERT INTO assigned (studentemail,Quizid,Grade) VALUES('$studentemail','$Quizid','$Grade')");
@@ -323,6 +337,17 @@ class Quiz
     {
       return  $this->dbConnection->query("SELECT Quizid FROM quiz WHERE Courseid='$Courseid'");
     }
+    public function GetCourseid($Quizid)
+    {
+        $result= $this->dbConnection->query("SELECT Courseid FROM quiz WHERE Quizid='$Quizid'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                return $row["Courseid"];
+            }
+        }
+        return null;
+    } 
     public function UpdateQuiz($Quizname,$Grade,$DateofQuiz, $startofQuiz,$EndofQuiz,$Quizid)
     {
         $this->dbConnection->query("UPDATE quiz SET Quizname='$Quizname',Grade='$Grade',DateofQuiz='$DateofQuiz',startofQuiz='$startofQuiz',EndofQuiz='$EndofQuiz' WHERE Quizid='$Quizid' ");
@@ -384,6 +409,20 @@ class Quiz
      return null;
  
     }
+    public function GetEnrolled2($emailstudent,$Courseid)
+    {
+
+     $result = $this->dbConnection->query("SELECT Courseid FROM  enrollcourse WHERE emailstudent='$emailstudent' AND  Courseid='$Courseid'");
+     // If the query returns a result
+     if ($result->num_rows > 0) {
+         // output data of each row
+         while ($row = $result->fetch_assoc()) {
+              return $row["Courseid"];
+         }
+     }
+     return null;
+ 
+    }
     public function GetStudents($Courseid)
     {
         $result = $this->dbConnection->query("SELECT emailstudent FROM  enrollcourse WHERE Courseid='$Courseid'");
@@ -432,6 +471,18 @@ class Quiz
     {
        $this->dbConnection->query("UPDATE Quiz SET emailed='$emailed' WHERE Quizid='$Quizid'");
           
+            }
+            public function GetQuizidbyQuesid($Quesid)
+            {
+                $result = $this->dbConnection->query("SELECT Quizid FROM  question WHERE Quesid='$Quesid'");
+                // If the query returns a result
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        return $row["Quizid"];
+                    }
+                }
+                return null;
             }
     
 

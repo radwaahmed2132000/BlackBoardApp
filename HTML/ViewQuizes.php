@@ -6,6 +6,10 @@ if(!isset($_SESSION['type']) ||
 header("Location:Login.html");
 if($_SESSION['type']=="Teacher")
 header("Location:Home.php");
+$Quiz=new Quiz();
+$found=$Quiz->GetEnrolled2($_SESSION['email'],$_GET['id']);
+if(!isset($found))
+header("Location:Home.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

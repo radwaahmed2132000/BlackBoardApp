@@ -6,6 +6,8 @@ if(!isset($_SESSION['type']) ||
 header("Location:Login.html");
 if(empty($_GET['id']) || empty($_GET['studentemail']) )
 header("Location:Home.php");
+if($_GET['studentemail']!=$_SESSION['email'])
+header("Location:Home.php");
 ?> -->
 <!DOCTYPE html>
 <html lang="en">
