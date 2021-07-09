@@ -394,6 +394,45 @@ class Quiz
     {
         $this->dbConnection->query("DELETE FROM  enrollcourse WHERE emailstudent='$emailstudent' AND  Courseid='$Courseid'");
     }
+    public function Getnotemailed($emailed,$DateofQuiz,$EndofQuiz)
+    {
+        $result=$this->dbConnection->query("SELECT Quizname,Courseid,Quizid FROM Quiz WHERE (emailed='$emailed' AND DateofQuiz<'$DateofQuiz') OR (emailed='$emailed' AND DateofQuiz='$DateofQuiz' AND EndofQuiz<'$EndofQuiz')");
+         // If the query returns a result
+         if ($result->num_rows > 0)
+        {
+            echo "done";
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                $Courseid=$row['Courseid'];
+              $teachers=$this->dbConnection->query("SELECT teacheremail FROM course WHERE Courseid='$Courseid' ");
+              if($teachers->num_rows>0)
+              {
+                   // output data of each row
+                while ($teacher = $teachers->fetch_assoc()) {
+                $to_email = $teacher['teacheremail'];
+                $subject =$row['Quizname'];
+                $body = "This Quiz ".$subject." has been eneded";
+                $headers = "From: sender\'s email";
+                
+                if (mail($to_email, $subject, $body, $headers)) {
+                    echo "Email successfully sent to $to_email...";
+                    $this->UpdateEmailsend($row['Quizid'],
+                    !$emailed);
+                } else {
+                    echo "Email sending failed...";
+                }
+                }
+              }
+            }
+        }
+        return null;
+          
+    }
+    public function UpdateEmailsend($Quizid,$emailed)
+    {
+       $this->dbConnection->query("UPDATE Quiz SET emailed='$emailed' WHERE Quizid='$Quizid'");
+          
+            }
     
 
 

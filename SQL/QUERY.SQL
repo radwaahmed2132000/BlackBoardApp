@@ -50,3 +50,4 @@ CREATE TABLE Answers( Quesid int, Answer text, Quizid int ,emailstudent varchar(
 ALTER TABLE quiz ADD DateofQuiz Date;
 ALTER TABLE quiz ADD startofQuiz time;
 ALTER TABLE quiz ADD EndofQuiz time;
+alter table quiz add emailed boolean;

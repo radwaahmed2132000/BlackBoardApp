@@ -72,14 +72,14 @@ header("Location:Home.php");
            $Quiz=new Quiz();
            if(empty($_GET['id']))
            header("Location:Home.php");
-                //    $date=date("Y-m-d");
+                   $date=date("Y-m-d");
                   
-                //    $time= date("h:i:s");
+                   $time= date("h:i:s");
                   
-                //   if($date> $Quiz->GetDateofQuiz($Quizid) )
-                //    {
-                //     header("Location:Home.php");
-                //    }
+                  if($date> $Quiz->GetDateofQuiz($Quizid) )
+                   {
+                    header("Location:Home.php");
+                   }
                 //    else if($date==$Quiz->GetDateofQuiz($Quizid))
                 //     if( $time>$Quiz->GetEndofQuiz($Quizid))
                 //    {

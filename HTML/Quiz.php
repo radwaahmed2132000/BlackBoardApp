@@ -187,7 +187,7 @@ var end='<?php echo $Quiz-> GetEndofQuiz($Quizid);?>';
 setInterval(function(){ 
     var currentDate =new Date();
     var x= currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-    if(x>=end)
+    if(x>=end )
     {
         console.log("Terminate");
         var xmlhttp;

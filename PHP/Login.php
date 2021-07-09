@@ -1,11 +1,17 @@
 <?php
 require_once 'Student.php';
 require_once 'Teacher.php';
+require_once 'Quiz.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 if(isset($_POST["submit"])) 
-{
+{ 
+    $emailed=false;
+    $DateofQuiz=date("Y-m-d");
+    $EndofQuiz= date("h:i:s");
+    $Quiz=new Quiz();
+    $Quiz-> Getnotemailed($emailed,$DateofQuiz,$EndofQuiz);
     $email=$_POST['email'];
     $Pass=$_POST['pass'];
     if(empty($email) || empty($Pass))
