@@ -11,9 +11,11 @@ if(isset($_POST["submit"]))
     $DateofQuiz=date("Y-m-d");
     $EndofQuiz= date("h:i:s");
     $Quiz=new Quiz();
+    // send email for all teachers which quizes are ended and not get email
     $Quiz-> Getnotemailed($emailed,$DateofQuiz,$EndofQuiz);
     $email=$_POST['email'];
     $Pass=$_POST['pass'];
+    // check validtion for input
     if(empty($email) || empty($Pass))
     {
         echo'<script>alert("Some fields are empty or not checked!");window.location.href="../HTML/Login.html";</script>';
@@ -22,11 +24,15 @@ if(isset($_POST["submit"]))
 
      $Student= new Student();
       $Teacher=new Teacher();
+      //check if the person who try to log in , is student or teacher
      if($Student-> getemail($email)!=null)
      {
+         // check if the password & email are correct 
         if($Student->getPass($email,md5($Pass))!=null)
         {
+            //save type of user
             $_SESSION['type']="Student";
+            //save email of user
             $_SESSION['email']=$email;
             header("Location:../HTML/Home.php");
         }
@@ -36,9 +42,12 @@ if(isset($_POST["submit"]))
      }
      else if($Teacher->getemail($email)!=null)
      {
+          // check if the password & email are correct 
         if($Teacher->getPass($email,md5($Pass))!=null)
         {
+             //save type of user
             $_SESSION['type']="Teacher";
+               //save email of user
             $_SESSION['email']=$email;
              header("Location:../HTML/Home.php");
         }

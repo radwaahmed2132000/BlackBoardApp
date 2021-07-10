@@ -76,10 +76,10 @@ header("Location:Home.php");
                   
                    $time= date("h:i:s");
                   
-                  if($date> $Quiz->GetDateofQuiz($Quizid) )
-                   {
-                    header("Location:Home.php");
-                   }
+                //   if($date< $Quiz->GetDateofQuiz($Quizid) )
+                //    {
+                //     header("Location:Home.php");
+                //    }
                 //    else if($date==$Quiz->GetDateofQuiz($Quizid))
                 //     if( $time>$Quiz->GetEndofQuiz($Quizid))
                 //    {

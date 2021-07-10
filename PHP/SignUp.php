@@ -16,6 +16,7 @@ if(isset($_POST["submit"]))
     $type=$_POST['type'];
     $Phone=$_POST['Phone'];
     $dbConnection = DBConnection::getInst()->getConnection();
+    // check validtions of input
     if(empty($email) || empty($Pass)|| empty($FristName) || empty($LastName) || empty($Confrimpass) ||empty($Gender) ||
     empty($type) )
     {
@@ -49,8 +50,10 @@ if(isset($_POST["submit"]))
      $Student= new Student();
       $Teacher=new Teacher();
     if($type=="Student")
-    { if($Student-> getemail($email)==null && $Teacher->getemail($email)==null && $Student-> geteuqalsPhone($Phone)==null && $Teacher->geteuqalsPhone($Phone)==null)
-     {
+    {// check if email not found before in students or teachers and phone
+         if($Student-> getemail($email)==null && $Teacher->getemail($email)==null && $Student-> geteuqalsPhone($Phone)==null && $Teacher->geteuqalsPhone($Phone)==null)
+     {   
+         //insert new student
         $Student->InsertStudent($email,$FristName,$LastName,$Phone,	$Gender	,md5($Pass));
         $_SESSION['type']="Student";
         $_SESSION['email']=$email;
@@ -68,6 +71,7 @@ if(isset($_POST["submit"]))
      {
       if($Student->geteuqalsPhone($Phone))
       echo "founded";
+      // check if email not found before in students or teachers and phone
              if($Teacher->getemail($email)==null && $Student-> getemail($email)==null && $Student-> geteuqalsPhone($Phone)==null && $Teacher->geteuqalsPhone($Phone)==null )
             {  $Teacher->InsertTeacher($email,$FristName,$LastName,$Phone,	$Gender	,md5($Pass));
                 $_SESSION['type']="Teacher";

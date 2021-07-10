@@ -1,5 +1,6 @@
 <?php
 require_once 'connection.php';
+// this class is the most important class
 class Quiz
 {
     public function __construct(){

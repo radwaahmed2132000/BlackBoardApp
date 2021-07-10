@@ -3,9 +3,11 @@
 require_once 'Quiz.php';
 $Quesid=$_GET['id'];
 $Quiz=new Quiz();
+// Delete Question from quiz
 $Quizid=$Quiz-> GetQuizids($Quesid);
 $numberofQues=$Quiz-> countquestions($Quizid);
 echo $numberofQues;
+// delete answers if any one answer question
 $Quiz->DeleteAnswer($Quesid);
 $Quiz->DeleteQues($Quesid);
 if($numberofQues==1)

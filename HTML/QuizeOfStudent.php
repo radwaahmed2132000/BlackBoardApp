@@ -251,7 +251,20 @@ header("Location:Home.php");
        </div>
       </form>
     </div>
-        
+    <div class="container">
+       <div class="row">
+           <div class="col-lg-3">
+                <h5>“COVID 19 is the Biggest challenge for science
+                        But it is the biggest Exam for Humanity.
+                        Our People are dying, it's not in our hands
+                        But it's in our hands, don't let Pandemic Kill Humanity”</h5>
+                        ― Mohammed Zaki Ansari
+           </div>
+           <div class="col-lg-9">
+               <img class="img-fluid" src="../Images/spot-talent.png" alt="">
+           </div>
+       </div>    
+    </div>    
     </div>
     <div>
         <footer id="footer">
