@@ -9,6 +9,7 @@ header("Location:Home.php");
 if($_GET['studentemail']!=$_SESSION['email'])
 header("Location:Home.php");
 ?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,12 +86,13 @@ header("Location:Home.php");
                    {
                     header("Location:Home.php");
                    }
-                //    else if($date==$Quiz->GetDateofQuiz($Quizid))
-                //     if( $time<$Quiz->GetEndofQuiz($Quizid))
-                //    {
-                //     header("Location:Home.php");
+                   
+                   else if($date==$Quiz->GetDateofQuiz($Quizid))
+                    if( $time<$Quiz->GetEndofQuiz($Quizid))
+                   {
+                    header("Location:Home.php");
                         
-                //    }
+                   }
                   $result= $Quiz->GetQuestions($Quizid);
                     // If the query returns a result
                     if ($result->num_rows > 0) {?>
@@ -256,8 +258,44 @@ header("Location:Home.php");
 </body>
 
 
-
-<script src="../bootstrap/bootstrap.js"></script>
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>
+<script src="../bootstrap/bootstrap.js"></script>
+<script>
+
+
+
+
+var quiztime='<?php echo $Quiz-> GetstartofQuiz($Quizid);?>';
+var end='<?php echo $Quiz-> GetEndofQuiz($Quizid);?>';
+var dateof='<?php echo $Quiz->GetDateofQuiz($Quizid);?>'
+
+ // Get today's date and time
+ 
+
+// console.log(x);
+setInterval(function(){ 
+    var currentDate =new Date();
+    var month=+currentDate.getMonth()+1;
+    if(month<10)
+    var datenow=currentDate.getFullYear()+"-0"+month+"-"+currentDate.getDate();
+    else
+    var datenow=currentDate.getFullYear()+"-"+month+"-"+currentDate.getDate();
+    var x= currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+    console.log(datenow);
+    console.log(dateof)
+    if(datenow==dateof)
+{
+    console.log("jjj");
+    if(x<quiztime || x<end)
+    { console.log("aa");
+        window.location.replace("Course.php");
+    }
+}
+    
+    
+
+}, 1000);
+</script>
+
 </html>

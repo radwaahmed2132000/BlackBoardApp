@@ -28,9 +28,9 @@
         }
         // get value of total gradw
         $Grade=(($j*1.0)/$i)*$Grade;
-       echo $_SESSION['email'];
-       echo $Quizid;
-       echo $Grade;
+      //  echo $_SESSION['email'];
+      //  echo $Quizid;
+      //  echo $Grade;
        // insert grade of student
         $Quiz->InsertAssigned($_SESSION['email'],$Quizid,ceil($Grade));
         echo'<script>alert("Quiz Submitted Successfuly");window.location.href="../HTML/Home.php";</script>';
